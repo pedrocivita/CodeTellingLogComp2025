@@ -1,119 +1,197 @@
-# CodeTelling - Linguagem de Programação
+# CodeTelling - A Narrative Programming Language
 
-## APS - Lógica Da Computação
+[![Python](https://img.shields.io/badge/Python-3.7+-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
+[![C](https://img.shields.io/badge/C-00599C?style=flat&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![Flex](https://img.shields.io/badge/Flex-Lexer-orange?style=flat)](https://github.com/westes/flex)
+[![Bison](https://img.shields.io/badge/Bison-Parser-red?style=flat)](https://www.gnu.org/software/bison/)
+[![LLVM](https://img.shields.io/badge/LLVM-Compiler-262D3A?style=flat&logo=llvm&logoColor=white)](https://llvm.org/)
+[![License](https://img.shields.io/badge/License-Academic_Project-blue?style=flat)](https://github.com/pedrocivita/CodeTellingLogComp2025)
 
-## Por Caio Bôa e Pedro Civita
+A unique programming language that enables developers to write executable code embedded within natural language narratives, developed as part of the Computer Logic course at Insper Institute of Education and Research.
 
----
+## Table of Contents
 
-**CodeTelling** é uma linguagem de programação que tem como objetivo proporcionar ao programador a possibilidade de escrever seu código em narrativas. Ou seja, permite escrever o código de forma que conte uma história ou represente um texto escolhido pelo programador. Sua proposta inicial surge da possibilidade de programar de forma quase encriptada em textos literários, possibilitando a escrita de código em meio a um livro, música, poema, etc.
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Language Specification](#language-specification)
+- [Project Structure](#project-structure)
+- [Examples](#examples)
+- [Video Demonstration](#video-demonstration)
+- [Authors](#authors)
+- [Contact](#contact)
 
-## Funcionamento
+## Overview
 
-O **CodeTelling** opera através de tokens-chave específicos que representam comandos para a linguagem. A partir desses tokens, é gerada uma gramática capaz de ser interpretada pelo interpretador para comandos no computador. O principal diferencial do **CodeTelling** está em ignorar todos os tokens que não são identificados como tokens-chave, sem gerar erros. Isso permite que palavras quaisquer sejam introduzidas em meio aos tokens-chave sem problemas para o interpretador da linguagem.
+**CodeTelling** is an innovative programming language designed to allow developers to write executable code within literary narratives. The language enables programmers to embed computational logic within stories, poems, songs, or any form of text, making code nearly invisible within prose. This unique approach bridges the gap between creative writing and programming, offering a novel way to think about code structure and documentation.
 
-## Utilização
+The language was developed as the final project for the Computer Logic (Lógica da Computação) course at Insper, showcasing the complete pipeline of compiler design from lexical analysis to code generation.
 
-Foram desenvolvidos três compiladores para a linguagem **CodeTelling**, sendo eles:
+### Motivation
 
-- Compilador em Python
-- Compilador em C
-- Compilador em LLVM
+The primary motivation behind CodeTelling is to explore the intersection of natural language and programming. By allowing arbitrary text to coexist with executable code, the language:
 
-### Compilador em Python
+- Enables steganographic programming where code can be hidden within seemingly innocent text
+- Creates opportunities for creative expression in programming
+- Demonstrates advanced compiler design concepts
+- Challenges traditional notions of code readability and structure
 
-O compilador em Python foi criado como um protótipo para a linguagem, sendo o mais simples dos compiladores desenvolvidos. Por se tratar de um protótipo, ele não possui algumas funcionalidades dos demais compiladores, como a remoção de comentários, interpretação de `else if` entre `if` e `else`, e utilização dos operadores booleanos `==` e `!=`.
+## Key Features
 
-Para utilizá-lo, basta executar o comando dentro do diretório */CompiladorPython*:
+- **Narrative Integration**: Write functional code embedded within natural language text
+- **Flexible Syntax**: Non-keyword tokens are ignored by the compiler, allowing for creative freedom
+- **Multiple Implementations**: Three complete compiler implementations (Python, C/Flex/Bison, LLVM)
+- **C-like Grammar**: Familiar programming constructs (variables, conditionals, loops, expressions)
+- **Cross-Platform**: LLVM implementation generates portable intermediate representation
+- **Portuguese Keywords**: Language tokens based on Portuguese words for natural text flow
 
+## Technology Stack
+
+This project demonstrates proficiency in multiple compiler development technologies:
+
+- **Python**: Prototype compiler implementation with custom lexer and parser
+- **C**: Production compiler with advanced features
+- **Flex**: Lexical analysis (tokenization)
+- **Bison**: Syntax analysis (parsing)
+- **LLVM**: Intermediate representation and code generation
+- **Make**: Build automation
+
+## Installation
+
+### Prerequisites
+
+Depending on which compiler implementation you want to use, you'll need:
+
+**For Python Compiler:**
+- Python 3.7 or higher
+
+**For C Compiler (Flex/Bison):**
+- GCC (GNU Compiler Collection)
+- Flex (Fast Lexical Analyzer)
+- Bison (Parser Generator)
+- Make
+
+**For LLVM Compiler:**
+- GCC
+- Flex
+- Bison
+- LLVM toolchain
+- Make
+
+### Setup
+
+1. Clone the repository:
 ```bash
-python3 Main.py <arquivo_de_entrada>
+git clone https://github.com/pedrocivita/CodeTellingLogComp2025.git
+cd CodeTellingLogComp2025
 ```
 
-Exemplo:
+2. Choose your compiler implementation and navigate to its directory (see [Usage](#usage) section below).
 
+## Usage
+
+CodeTelling provides three different compiler implementations, each with varying feature sets and complexity levels.
+
+### Python Compiler
+
+The Python compiler serves as a prototype implementation with basic functionality. It does not support comment removal, `else if` statements, or equality operators (`==`, `!=`).
+
+**Running the Python compiler:**
+
+```bash
+cd CompiladorPython
+python3 Main.py <input_file>
+```
+
+**Example:**
 ```bash
 python3 Main.py ../TestFiles/teste1.txt
 ```
 
-### Compilador em C
+### C Compiler (Flex/Bison)
 
-O compilador em C realiza sua análise léxica em *Flex*, sua análise sintática em *Bison* e a geração de código em *C*. O compilador em C possui todas as funcionalidades implementadas para o CodeTelling até o momento.
+The C compiler provides full language support with lexical analysis in Flex, syntax analysis in Bison, and code generation in C.
 
-Lembre-se de utilizar todos os comandos dentro do diretório */CompiladorFlexBison*.
-
-Para sua utilização, caso o mesmo ainda não esteja compilado, primeiramente utilizar o seguinte comando:
+**Building the C compiler:**
 
 ```bash
+cd CompiladorFlexBison
 make
 ```
 
-Em seguida, para execução de um arquivo de entrada, utilizar o seguinte comando:
+**Running the C compiler:**
 
 ```bash
-python3 remove_acentos.py < arquivo de entrada > | ./code_tel
+python3 remove_acentos.py < <input_file> | ./code_tel
 ```
 
-Exemplo:
-
+**Example:**
 ```bash
 python3 remove_acentos.py < ../TestFiles/teste1.txt | ./code_tel
 ```
 
-Tal compilador exige um pré processamento para correto funcionamento até a presente versão, que foi implementado utilizando python.
+Note: Preprocessing is required to remove accents for proper compilation.
 
-### Compilador em LLVM
+### LLVM Compiler
 
-O compilador em LLVM realiza, assim como o compilador em C, sua análise léxica em *Flex* e sua análise sintática em *Bison*, porém realiza a geração de código em *LLVM*. O compilador em LLVM possui todas as funcionalidades implementadas para o CodeTelling até o momento e representa a versão final do projeto de compiladores.
+The LLVM compiler represents the complete, production-ready implementation. It generates LLVM intermediate representation, enabling portability across different architectures.
 
-Lembre-se de utilizar todos os comandos dentro do diretório */CompiladorLLVM*.
-
-Assim como o compilador em C, o mesmo necessita de um pré processamento para funcionamento e compilação utilizando o comando make:
+**Building the LLVM compiler:**
 
 ```bash
+cd CompiladorLLVM
 make
 ```
 
-Em seguida, para execução de um arquivo de entrada, utilizar o seguinte comando:
+**Compiling a CodeTelling program:**
 
 ```bash
-python3 remove_acentos.py < arquivo de entrada > | ./code_tel > output.ll
-```
+# Step 1: Generate LLVM IR
+python3 remove_acentos.py < <input_file> | ./code_tel > output.ll
 
-Exemplo:
-
-```bash
-python3 remove_acentos.py < ../TestFiles/teste1.txt | ./code_tel > output.ll
-```
-
-Por se tratar de um compilador em LLVM, o mesmo gera um arquivo de saída em LLVM, que pode ser compilado em qualquer máquina que possua o LLVM instalado, porém antes disso é necessário realizar um pós processamento no arquivo output.ll, uma vez que alguns caracteres especiais do texto podem interferir na geração do código LLVM.
-
-```bash
+# Step 2: Post-process the output
 python3 pos_processamento.py output.ll output_cleaned.ll
-```
 
-Com arquivo de saída limpo, agora ele pode ser executado em qualquer máquina que possua o LLVM instalado, utilizando o seguinte comando:
-
-```bash
+# Step 3: Execute the compiled program
 lli output_cleaned.ll
 ```
 
-## Regras da linguagem
+**Example:**
+```bash
+python3 remove_acentos.py < ../TestFiles/teste1.txt | ./code_tel > output.ll
+python3 pos_processamento.py output.ll output_cleaned.ll
+lli output_cleaned.ll
+```
 
-Alguns pontos importantes para descrição da versão atual da linguagem **CodeTelling** são:
+The LLVM implementation requires both preprocessing (accent removal) and post-processing (cleanup of special characters) to ensure correct code generation.
 
-1) A linguagem suporta apenas comentários ao final do código, sem comentários entre linhas.
-2) A linguagem não suporta uso de acentos e virgulas em strings e varíaveis, embora as mesmas possam ser utilizadas como tokens não identificados.
+## Language Specification
 
-### Descrição da Gramática da Linguagem
+### Current Limitations
 
-O alfabeto da linguagem **CodeTelling** essencialmente representa todas as palavras possíveis de serem utilizadas em texto, uma vez que nenhuma palavra essencialmente será recusada pelo analisador léxico, porém segue abaixo as palavras utilizadas como tokens chave para a linguagem:
+The current version of CodeTelling has the following constraints:
 
-{ calma, raiva, felicidade, tristeza, ansiedade, nojo, poder, dever, realizar, tornar, expressar, encontrar, esquecer, proceder, esse, essa, concordar, aquele, aquela, se, ou, para, *, vez, sempre, nunca, talvez, parecer, pois, nada, [0-9] }
+1. Comments are only supported at the end of the code (not inline)
+2. Accents and commas are not supported within strings and variable names (though they can appear in non-keyword text)
 
-Através desses tokens é possível montar qualquer código em **CodeTelling** seguindo a gramática da linguagem, que se assemelha muito a gramática da linguagem C, seguindo a seguinte **EBNF**:
+### Language Alphabet
 
-```EBNF
+CodeTelling's alphabet encompasses all possible words in Portuguese text. The following tokens serve as keywords for the language:
+
+```
+{ calma, raiva, felicidade, tristeza, ansiedade, nojo, poder, dever, realizar, 
+  tornar, expressar, encontrar, esquecer, proceder, esse, essa, concordar, 
+  aquele, aquela, se, ou, para, *, vez, sempre, nunca, talvez, parecer, pois, 
+  nada, [0-9] }
+```
+
+### Grammar (EBNF)
+
+The language follows a C-like grammar structure. Below is the formal Extended Backus-Naur Form specification:
+
+```ebnf
 <programa> ::= <bloco>
 
 <bloco> ::= "para" <declarações> "vez"|"*"
@@ -189,66 +267,93 @@ Através desses tokens é possível montar qualquer código em **CodeTelling** s
 <caractere> ::= qualquer caracter exceto "pois" e "nada"
 ```
 
-## Guia de Programação em CodeTelling
+### Token Reference
 
-Para facilitar a introdução ao **CodeTelling** é valido realizar um paralelo com a linguagem C, uma vez que a linguagem **CodeTelling** se assemelha muito a linguagem C em sua gramática e estrutura de programação.
+The following table maps CodeTelling tokens to their C language equivalents:
 
-Para tal primeiramente descreveremos os tokens da linguagem **CodeTelling** e sua equivalência em C:
+| CodeTelling Token | Description                    | C Equivalent            |
+|-------------------|--------------------------------|-------------------------|
+| `calma`           | Numeric value 0                | `0`                     |
+| `raiva`           | Numeric value 1                | `1`                     |
+| `felicidade`      | Numeric value 2                | `2`                     |
+| `tristeza`        | Numeric value 3                | `3`                     |
+| `ansiedade`       | Numeric value 4                | `4`                     |
+| `nojo`            | Numeric value 5                | `5`                     |
+| `poder` / `dever` | Assignment operators           | `=`                     |
+| `realizar`        | Addition operator              | `+`                     |
+| `tornar`          | Subtraction operator           | `-`                     |
+| `expressar`       | Less than operator             | `<`                     |
+| `encontrar`       | Greater than operator          | `>`                     |
+| `esquecer`        | Equality operator              | `==`                    |
+| `proceder`        | Inequality operator            | `!=`                    |
+| `esse` / `essa`   | Variable reference prefix      | (none)                  |
+| `aquele` / `aquela` | Data types (int and string)  | `int` / `char*`         |
+| `sempre`          | Conditional if statement       | `if`                    |
+| `talvez`          | Conditional else if statement  | `else if`               |
+| `nunca`           | Conditional else statement     | `else`                  |
+| `parecer`         | While loop                     | `while`                 |
+| `concordar`       | Print function                 | `printf`                |
+| `se`              | Left parenthesis               | `(`                     |
+| `ou`              | Right parenthesis              | `)`                     |
+| `para`            | Left brace                     | `{`                     |
+| `vez` / `*`       | Right brace                    | `}`                     |
+| `///`             | Comment                        | `//`                    |
+| `pois` / `nada`   | String delimiters              | `"`                     |
+| `NUM`             | Numeric literal                | Integers                |
+| `VAR`             | Variable identifier            | Variable names          |
+| `STR`             | String literal                 | String literals         |
+| `.`               | Statement terminator           | `;`                     |
 
-Tokens da Linguagem **CodeTelling** e sua Equivalência em C
-A seguir, uma tabela que mapeia os tokens utilizados na linguagem CodeTelling para seus equivalentes na linguagem C:
+## Project Structure
 
-| **Token CodeTelling** | **Descrição**                          | **Equivalente em C**                                     |
-|-----------------------|----------------------------------------|----------------------------------------------------------|
-| calma                 | Valor numérico 0                        | `0`                                                      |
-| raiva                 | Valor numérico 1                        | `1`                                                      |
-| felicidade            | Valor numérico 2                        | `2`                                                      |
-| tristeza              | Valor numérico 3                        | `3`                                                      |
-| ansiedade             | Valor numérico 4                        | `4`                                                      |
-| nojo                  | Valor numérico 5                        | `5`                                                      |
-| poder / dever         | Operadores de atribuição                | `=`                                                      |
-| realizar              | Operador de adição                      | `+`                                                      |
-| tornar                | Operador de subtração                   | `-`                                                      |
-| expressar             | Operador de menor que                   | `<`                                                      |
-| encontrar             | Operador de maior que                   | `>`                                                      |
-| esquecer              | Operador de igualdade                   | `==`                                                     |
-| proceder              | Operador de desigualdade                | `!=`                                                     |
-| esse / essa           | Prefixo para referência de variáveis    | Nenhum equivalente direto; usado para referenciar variáveis |
-| aquele / aquela       | Tipos de dados int e str                | `int` e `char*` (para strings)                           |
-| sempre                | Estrutura condicional if                | `if`                                                     |
-| talvez                | Estrutura condicional else if           | `else if`                                                |
-| nunca                 | Estrutura condicional else              | `else`                                                   |
-| parecer               | Estrutura de repetição while            | `while`                                                  |
-| concordar             | Função de impressão printf              | `printf`                                                 |
-| se                    | Parêntese esquerdo                      | `(`                                                      |
-| ou                    | Parêntese direito                       | `)`                                                      |
-| para                  | Chave esquerda                          | `{`                                                      |
-| vez / *               | Chave direita                           | `}`                                                      |
-| ///                   | Comentário                              | `//`                                                     |
-| pois / nada           | Delimitadores de strings                 | `"`                                                      |
-| NUM                   | Literal numérico (inteiro)              | Inteiros (`0`, `1`, etc.)                                |
-| VAR                   | Identificador de variável               | Nomes de variáveis (`x`, `y`)                             |
-| STR                   | Literal de string                       | Strings (`"gato"`, `"cachorro"`)                          |
-| ENDLINE               | Final de declaração                     | `;`                                                      |
+```
+CodeTellingLogComp2025/
+├── CompiladorPython/       # Python prototype compiler
+│   ├── Main.py            # Entry point
+│   ├── Parser.py          # Syntax analyzer
+│   ├── Tokenizer.py       # Lexical analyzer
+│   ├── SymbolTable.py     # Symbol table implementation
+│   └── Utils.py           # Utility functions
+├── CompiladorFlexBison/    # C compiler with Flex/Bison
+│   ├── lexer.l            # Flex lexer specification
+│   ├── parser.y           # Bison parser specification
+│   ├── main.c             # Main program
+│   ├── nodes.c/h          # AST node definitions
+│   ├── symbol_table.c/h   # Symbol table
+│   ├── remove_acentos.py  # Preprocessing script
+│   └── Makefile           # Build configuration
+├── CompiladorLLVM/         # LLVM compiler (production)
+│   ├── lexer.l            # Flex lexer specification
+│   ├── parser.y           # Bison parser specification
+│   ├── codegen.c/h        # LLVM code generation
+│   ├── main.c             # Main program
+│   ├── nodes.c/h          # AST node definitions
+│   ├── symbol_table.c/h   # Symbol table
+│   ├── remove_acentos.py  # Preprocessing script
+│   ├── pos_processamento.py # Post-processing script
+│   └── Makefile           # Build configuration
+└── TestFiles/              # Example programs and test cases
+    ├── teste1.txt
+    ├── teste2.txt
+    └── ...
+```
 
-Em relação a **NUM**, se trata de qualquer valor numérico inserido no código, sendo automaticamente convertido para um token de valor inteiro.
+## Examples
 
-Para **VAR**, se trata de qualquer palavra inserida logo depois de um identificador de varíavel, sendo ela identificada como uma varíavel.
+### Example 1: Simple Syntax
 
-Se tratando de **STR**, se trata de tudo que for inserido entre tokens de delimitação de strings, como pois e nada.
+A minimal example demonstrating the basic syntax:
 
-A partir de tais tokens é possível realizar a escrita de um código em **CodeTelling**, seguindo a gramática da linguagem e utilizando os tokens chave para a escrita do código.
-
-```CodeTelling
+**CodeTelling:**
+```codetelling
 Para aquele x poder nojo.
 Sempre se esse x encontrar tristeza ou
 Para concordar se nada PRINT pois ou. Vez nunca
 Para concordar se nada NOP pois ou. Vez *
 ```
 
-Pode ser traduzido para o seguinte código em C:
-
-```C
+**Equivalent C Code:**
+```c
 {
     int x = 5;
     if (x > 3)
@@ -262,34 +367,75 @@ Pode ser traduzido para o seguinte código em C:
 }
 ```
 
-Porém a mágica da linguagem **CodeTelling** esta em sua capacidade de ser escrita em meio a diversos tipos textuais, como poesias, músicas, livros, etc. Permitindo que o programador escreva seu código em meio a um texto qualquer, por exemplo:
+### Example 2: Narrative Integration
 
-```CodeTelling
+The true power of CodeTelling lies in its ability to embed code within natural text:
+
+**CodeTelling:**
+```codetelling
 Para que aquele homem viva em plenitude ele tem o poder de fazer o que for necessário a fim de buscar a felicidade.
 Esse homem dia sim dia não tem o dever de tentar, esse homem não deve desistir até realizar que não existe futuro em sua raiva.
 Portanto, concordar que se esse homem tem forças pra levantar ele deve ao menos tentar pode ser visto como um fato ou necessidade. *
 ```
 
-O código acima pode ser traduzido para o seguinte código em C:
-
-```C
+**Equivalent C Code:**
+```c
 {
     int homem = 2;
     homem = homem + 1;
-    printf(homem)
+    printf(homem);
 }
 ```
-## Vídeo de Explicação
 
-[Assista ao vídeo demonstrativo aqui](https://youtu.be/Gn_bO5Hm15M?si=v1hILJgHUHfdV_6z)
+In this example, the code is seamlessly integrated into a Portuguese narrative about a man's journey. The compiler extracts only the keywords it recognizes, ignoring all other text.
 
-Neste vídeo, apresentamos uma demonstração abrangente da **CodeTelling**, detalhando todo o processo de desenvolvimento e as funcionalidades da linguagem, assim como aplicações e demonstrações de uso.
+### How It Works
 
-## Contato
+CodeTelling operates through a unique compilation process:
 
-Caio Bôa - caioob - [caioob@al.insper.edu.br](mailto:caioob@al.insper.edu.br)
+1. **Lexical Analysis**: The tokenizer identifies language keywords while ignoring all non-keyword tokens
+2. **Syntax Analysis**: The parser builds an Abstract Syntax Tree (AST) from the recognized tokens
+3. **Code Generation**: The backend generates executable code (C output or LLVM IR)
 
-Pedro Civita - pedrotpc - [pedrotpc@al.insper.edu.br](mailto:pedrotpc@al.insper.edu.br)
+The key innovation is that unrecognized tokens are silently ignored rather than generating syntax errors. This allows arbitrary text to coexist with functional code, enabling creative and steganographic programming.
+
+## Video Demonstration
+
+For a comprehensive demonstration of CodeTelling, including detailed explanations of the development process, language features, and practical applications, watch the presentation video:
+
+[CodeTelling - Full Demonstration and Explanation](https://youtu.be/Gn_bO5Hm15M?si=v1hILJgHUHfdV_6z)
+
+The video covers:
+- Language design philosophy
+- Complete compiler pipeline
+- Live coding demonstrations
+- Real-world use cases
+- Technical implementation details
+
+## Authors
+
+This project was developed by:
+
+**Caio Bôa** ([GitHub: caioob](https://github.com/caioob))  
+Computer Engineering Student, Insper Institute of Education and Research
+
+**Pedro Civita** ([GitHub: pedrocivita](https://github.com/pedrocivita))  
+Computer Engineering Student, Insper Institute of Education and Research
+
+## Contact
+
+For questions, suggestions, or collaboration opportunities:
+
+**Caio Bôa**  
+Email: [caioob@al.insper.edu.br](mailto:caioob@al.insper.edu.br)
+
+**Pedro Civita**  
+Email: [pedrotpc@al.insper.edu.br](mailto:pedrotpc@al.insper.edu.br)  
+LinkedIn: [linkedin.com/in/pedrocivita](https://www.linkedin.com/in/pedrocivita)
 
 ---
+
+**Academic Context**: This project was developed as the final assignment for the Computer Logic (Lógica da Computação) course at Insper Institute of Education and Research, Computer Engineering Program, 2025.
+
+**Repository**: [github.com/pedrocivita/CodeTellingLogComp2025](https://github.com/pedrocivita/CodeTellingLogComp2025)
 
