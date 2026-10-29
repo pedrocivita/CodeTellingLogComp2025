@@ -1,0 +1,12 @@
+# C build outputs (run `make` to rebuild)
+*.o
+CompiladorFlexBison/code_tel
+CompiladorLLVM/code_tel
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# OS
+.DS_Store
